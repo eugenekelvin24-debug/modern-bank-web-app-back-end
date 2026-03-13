@@ -3,6 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+# Make sure these URLs have NO SLASH at the end
 origins = [
     "https://trust-bank-ashy.vercel.app",
     "http://localhost:5173"
@@ -15,6 +21,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+# ... your accounts list and @app.get("/accounts") route below ...
 
 accounts = [
     {
