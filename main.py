@@ -1,28 +1,20 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
 
 app = FastAPI()
 
+origins = [
+    "https://trust-bank-ashy.vercel.app",
+    "http://localhost:5173"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://trust-bank-ashy.vercel.app"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
-@app.get("/accounts")
-def get_accounts():
-    return accounts
-
-app.mount("/assets", StaticFiles(directory="Trust Bank/dist/assets"), name="assets")
-
-@app.get("/{path:path}")
-async def server_react_app(full_path: str):
-    return FileResponse("Trust Bank/dist/index.html")
 
 accounts = [
     {
@@ -55,3 +47,8 @@ accounts = [
       'color': "bg-amber-600",
     }
 ]
+
+@app.get("/accounts")
+def get_accounts():
+    return accounts
+
